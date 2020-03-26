@@ -1,0 +1,20 @@
+build:
+  only:
+    - master
+  image: bash:latest
+  before_script:
+    - apk add openssh-client
+    - eval $(ssh-agent)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - scp -o StrictHostKeyChecking=no ./src/ root@harrisburgu.life:./husocial/database/schema
+    - |
+      ssh -o StrictHostKeyChecking=no root@harrisburgu.life "
+        set -e
+        cd ~/husocial/
+        docker-compose stop database
+        rm -rf ./database/data
+        docker-compose start database
+      "
