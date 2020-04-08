@@ -105,7 +105,7 @@ CREATE TABLE posts
   
   message VARCHAR (500), 
   
-  date_posted DATE NOT NULL
+  date_posted TIMESTAMP NOT NULL
   
   CONSTRAINT posts_fk_profile
     
