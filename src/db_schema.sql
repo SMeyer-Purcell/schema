@@ -91,3 +91,26 @@ CREATE TABLE friends
     REFERENCES profile (profile_id)
 
 ); 
+
+
+
+CREATE TABLE posts
+
+(
+  
+  post_id INT NOT NULL,
+  
+  -- Announcement, Comment
+  post_type VARCHAR(12) NOT NULL,
+  
+  message VARCHAR (500), 
+  
+  date_posted DATE NOT NULL
+  
+  CONSTRAINT posts_fk_profile
+    
+    FOREIGN KEY (post_id)
+  
+    REFERENCES profile (profile_id)
+
+);
